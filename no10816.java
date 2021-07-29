@@ -3,10 +3,8 @@ import java.io.*;
 
 
 
-public class ex {
+public class no10816 {
 
-	
-	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -15,19 +13,21 @@ public class ex {
 		
 		int N = Integer.valueOf(br.readLine());
 	   
-		int[] arr = new int[N];
+				
+		int[] count = new int[20000001];
 		
 		st = new StringTokenizer(br.readLine(), " ");
+		
+		
 		
 		for(int i = 0; i<N; i++) {
 				
 			int x = Integer.valueOf(st.nextToken());
-			
-			arr[i] = x;
+
+			count[x+10000000]++;
 			
 		}	
 		
-		Arrays.sort(arr);
 		
 		int M = Integer.valueOf(br.readLine());
 
@@ -37,31 +37,22 @@ public class ex {
 		st = new StringTokenizer(br.readLine(), " ");
 
 		
+		
+		
 		for(int i = 0; i<M; i++) {
 			
 				
 			int x = Integer.valueOf(st.nextToken());
 			
-			int y = 0;
+			int cnt=0;
 			
-			y = Arrays.binarySearch(arr, y, arr.length, x);
-			
-			int cnt;
-			
-			while(y>=0) {
-				
-				cnt++;
-				
-				y = Arrays.binarySearch(arr, y, arr.length+1, x);
-
-			}	
-					
+			cnt = count[x+10000000];
 					
 			sb.append(cnt).append(" ");
 				
-			}
-			
 		}
+			
+		
 
 		
 		
