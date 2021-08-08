@@ -7,67 +7,50 @@ public class ex {
 
 	
 	
-	public static void main(String[] args) throws NumberFormatException, IOException {
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static int checkPoint(String S) {
 		
-		StringTokenizer st;
+		int cnt = 0;
+		int sum = 0;
 		
-		int N = Integer.valueOf(br.readLine());
-	   
-		int[] arr = new int[N];
 		
-		st = new StringTokenizer(br.readLine(), " ");
-		
-		for(int i = 0; i<N; i++) {
-				
-			int x = Integer.valueOf(st.nextToken());
+		for(int i = 0 ; i < S.length(); i++) {
 			
-			arr[i] = x;
 			
-		}	
-		
-		Arrays.sort(arr);
-		
-		int M = Integer.valueOf(br.readLine());
-
-		StringBuilder sb = new StringBuilder();
-
-
-		st = new StringTokenizer(br.readLine(), " ");
-
-		
-		for(int i = 0; i<M; i++) {
-			
-				
-			int x = Integer.valueOf(st.nextToken());
-			
-			int y = 0;
-			
-			y = Arrays.binarySearch(arr, y, arr.length, x);
-			
-			int cnt;
-			
-			while(y>=0) {
+			if(S.charAt(i) == 'O') {
 				
 				cnt++;
 				
-				y = Arrays.binarySearch(arr, y, arr.length+1, x);
-
-			}	
-					
-					
-			sb.append(cnt).append(" ");
+				sum += cnt;
+			}
+			
+			else {
+				
+				cnt = 0;
 				
 			}
 			
 		}
+		
+		return sum;
+		
+	}
+	
+	
+	public static void main(String[] args) throws NumberFormatException, IOException {
 
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		int N = Integer.valueOf(br.readLine());
 		
 		
-		System.out.println(sb.toString().trim());
-		
-		
+		for(int i = 0; i<N; i++) {
+			
+			String S = br.readLine();
+			
+			System.out.println(checkPoint(S));
+			
+			
+		}
 		
 		
 		
