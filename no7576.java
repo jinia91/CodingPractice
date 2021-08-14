@@ -15,7 +15,7 @@ class node10 {
 		this.y = y;
 
 	}
-
+ 
 }
 
 public class no7576 {
