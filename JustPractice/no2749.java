@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class no11444 {
+public class no2749 {
 
 	static int[][] fibo = {{1,1},
 						   {1,0}};
@@ -27,7 +27,7 @@ public class no11444 {
 
 				}
 
-				rs[i][j] = (int) (tmp[i][j] % 1000000007);
+				rs[i][j] = (int) (tmp[i][j] % 1000000);
 
 			}
 
