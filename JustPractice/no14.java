@@ -25,7 +25,7 @@ public class no14 {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine()," ");
-		int
+		
 		int M = Integer.valueOf(st.nextToken());
 		int N = Integer.valueOf(st.nextToken());
 		
