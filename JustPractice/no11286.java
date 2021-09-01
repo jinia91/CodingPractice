@@ -1,3 +1,5 @@
+package JustPractice;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,103 +11,90 @@ public class no11286 {
 
 	static int[] heaptree;
 	static int Lidx;
-	
-	
-	
-	private static void heapify(int[] a, int Pidx) {
 
-		int lidx;
-		int ridx;
-		int Asmallidx;
+	private static void heapify(int[] a, int pNode) {
 
-		while (Pidx * 2 + 1 <= Lidx) {
+		int l;
+		int r;
+		int small;
 
-			lidx = Pidx * 2 + 1;
-			ridx = Pidx * 2 + 2;
-			Asmallidx = Pidx;
+		while (pNode * 2 + 1 <= Lidx) {
 
-			if (lidx <= Lidx && Math.abs(a[Asmallidx]) > Math.abs(a[lidx]))
-				Asmallidx = lidx;
-			if (ridx <= Lidx && Math.abs(a[Asmallidx]) > Math.abs(a[ridx]))
-				Asmallidx = ridx;
-			
+			l = pNode * 2 + 1;
+			r = pNode * 2 + 2;
+			small = pNode;
 
-			if (Asmallidx>a[lidx] && lidx <= Lidx && Math.abs(a[Asmallidx]) == Math.abs(a[lidx]))
-				Asmallidx = lidx;
-			if (Asmallidx>a[ridx] && ridx <= Lidx && Math.abs(a[Asmallidx]) == Math.abs(a[ridx]))
-				Asmallidx = ridx;
-			
-			
-			
-			
-			if (Pidx != Asmallidx) {
-				swap(a, Pidx, Asmallidx);
-				Pidx = Asmallidx;
+			if (Math.abs(a[small]) > Math.abs(a[l]))
+				small = l;
+			if (r <= Lidx && Math.abs(a[small]) > Math.abs(a[r]))
+				small = r;
+
+			// 절대값이 같은 상황
+			if (a[small] > a[l] && Math.abs(a[small]) == Math.abs(a[l]))
+				small = l;
+			if (a[small] > a[r] && Math.abs(a[small]) == Math.abs(a[r]) && r <= Lidx)
+				small = r;
+
+			if (pNode != small) {
+				swap(a, pNode, small);
+				pNode = small;
 			}
-			
-			else return;
-			
+
+			else
+				return;
 		}
 	}
-	
-	
+
 	private static void swap(int[] a, int Pidx, int Asmallidx) {
 		int tmp = a[Pidx];
 		a[Pidx] = a[Asmallidx];
 		a[Asmallidx] = tmp;
-		
 	}
-	
-	
-	
+
 	private static int heapD(int[] a) {
-		
-		
+
 		swap(a, 0, Lidx);
 		int x = a[Lidx];
 		Lidx--;
 		if (Lidx < 1)
 			return x;
-		
+
 		heapify(a, 0);
 		return x;
 	}
-	
-	
+
 	private static void heapADD(int[] a, int x) {
 		Lidx++;
 		a[Lidx] = x;
-		
-		
+
 		if (Lidx < 1)
 			return;
-		
-		for(int i = Lidx; i>=0; i=(i-1)/2) {
-			if((Math.abs(a[(i-1)/2])>Math.abs(a[i]))) {
-				swap(a,(i-1)/2,i);
-			}
-			if(a[(i-1)/2]>a[i]&&(Math.abs(a[(i-1)/2])==Math.abs(a[i]))) {
-					swap(a,(i-1)/2,i);
-			}
-			else break;
 
-		
+		for (int i = Lidx; i >= 0; i = (i - 1) / 2) {
+			if ((Math.abs(a[(i - 1) / 2]) > Math.abs(a[i]))) {
+				swap(a, (i - 1) / 2, i);
+//				heapify(a, (i - 1) / 2);
+			}
+			else if (a[(i - 1) / 2] > a[i] && (Math.abs(a[(i - 1) / 2]) == Math.abs(a[i]))) {
+				swap(a, (i - 1) / 2, i);
+//				heapify(a, (i - 1) / 2);
+			} else
+				break;
+
 		}
 	}
-	
-	
 
 	public static void main(String[] args) throws IOException {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		int N = Integer.valueOf(br.readLine());
-		
-		heaptree= new int[N];
+
+		heaptree = new int[N];
 
 		StringBuilder sb = new StringBuilder();
-		Lidx=-1;
-		
+		Lidx = -1;
+
 		for (int i = 0; i < N; i++) {
 			int X = Integer.valueOf(br.readLine());
 
@@ -121,11 +110,9 @@ public class no11286 {
 				heapADD(heaptree, X);
 			}
 		}
-		
-		
+
 		System.out.println(sb);
-		
-		
+
 	}
 
 }
