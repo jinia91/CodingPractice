@@ -1,13 +1,11 @@
 package JustPractice;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class no11053 {
-
+public class no11722 {
 	static int[] arr;
 	static int[] memo;
 
@@ -17,7 +15,7 @@ public class no11053 {
 
 			for (int i = 0; i < x; i++) {
 
-				if(arr[x]>arr[i])
+				if(arr[x]<arr[i])
 				memo[x] = Math.max(dp(i)+1, memo[x]);
 
 			}

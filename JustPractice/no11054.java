@@ -1,15 +1,14 @@
 package JustPractice;
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class no11053 {
+public class no11054 {
 
 	static int[] arr;
 	static int[] memo;
+	static int[] memo2;
 
 	static int dp(int x) {
 
@@ -27,6 +26,24 @@ public class no11053 {
 		return memo[x];
 
 	}
+	
+	static int dp2(int x) {
+
+		if (memo2[x] == 0) {
+
+			for (int i = memo2.length-1; i > x; i--) {
+
+				if(arr[x]>arr[i])
+				memo2[x] = Math.max(dp2(i)+1, memo2[x]);
+
+			}
+
+		}
+		
+		return memo2[x];
+
+	}
+	
 
 	public static void main(String[] args) throws IOException {
 
@@ -45,11 +62,12 @@ public class no11053 {
 		}
 		
 		memo = new int[N];
+		memo2 = new int[N];
 
 		int max = 0;
 		for(int i =0; i<N; i++) {
 			
-			max = Math.max(dp(i), max);
+		 max = Math.max(dp(i)+dp2(i), max);
 			
 		}
 		
