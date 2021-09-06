@@ -8,9 +8,7 @@ public class no1927 {
 
 	static int[] heaptree;
 	static int Lidx;
-	
-	
-	
+
 	private static void heapify(int[] a, int Pidx) {
 
 		int lidx;
@@ -28,74 +26,62 @@ public class no1927 {
 			if (ridx <= Lidx && a[smallidx] > a[ridx])
 				smallidx = ridx;
 
-			
-			
-			
-			
 			if (Pidx != smallidx) {
 				swap(a, Pidx, smallidx);
 				Pidx = smallidx;
 			}
-			
-			else return;
-			
+
+			else
+				return;
+
 		}
 	}
-	
-	
+
 	private static void swap(int[] a, int Pidx, int smallidx) {
 		int tmp = a[Pidx];
 		a[Pidx] = a[smallidx];
 		a[smallidx] = tmp;
-		
 	}
-	
-	
-	
+
 	private static int heapD(int[] a) {
-		
-		
+
 		swap(a, 0, Lidx);
 		int x = a[Lidx];
 		Lidx--;
 		if (Lidx < 1)
 			return x;
-		
+
 		heapify(a, 0);
 		return x;
 	}
-	
-	
+
 	private static void heapADD(int[] a, int x) {
 		Lidx++;
 		a[Lidx] = x;
-		
-		
+
 		if (Lidx < 1)
 			return;
-		
-		for(int i = Lidx; i>=0; i=(i-1)/2) {
-			if((a[(i-1)/2]>a[i])) {
-				swap(a,(i-1)/2,i);
-			}else break;
 
-		
+		for (int i = Lidx; i >= 0; i = (i - 1) / 2) {
+			if ((a[(i - 1) / 2] > a[i])) {
+				swap(a, (i - 1) / 2, i);
+			} else
+				break;
+
 		}
 	}
-	
-	
 
 	public static void main(String[] args) throws IOException {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		int N = Integer.valueOf(br.readLine());
-		
-		heaptree= new int[N];
+
+		heaptree = new int[N];
 
 		StringBuilder sb = new StringBuilder();
-		Lidx=-1;
-		
+		Lidx = -1;
+
 		for (int i = 0; i < N; i++) {
 			int X = Integer.valueOf(br.readLine());
 
@@ -111,11 +97,9 @@ public class no1927 {
 				heapADD(heaptree, X);
 			}
 		}
-		
-		
+
 		System.out.println(sb);
-		
-		
+
 	}
 
 }
