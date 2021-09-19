@@ -8,53 +8,35 @@ import java.util.StringTokenizer;
 
 public class no2624 {
 
-	static int T, N;
+	static int T, k, answer;
 
 	static StringTokenizer st;
 
-	static ArrayList<Integer> coin = new ArrayList<>();
-
+	static int[][] coin;
 	static int[][] memo;
 
-	static void dp() {
+	static int dfs(int countMoney, int dept) {
+
 		
-		for(int t = 1; t<T; t++) {
-			
-			boolean flag = false;
-			
-			for(int n = 1; n<coin.size(); n++) {
-	
-				if(coin.get(n) == coin.get(n-1)) flag = true;
+		if (countMoney == T) {
+//			answer++;
+			return 1;
+		}
+		if (dept == k)
+			return 0;
+		if (countMoney > T)
+			return 0;
+		
+		if(memo[dept][countMoney] != -1) {
+			return memo[dept][countMoney];
+		}
 
-				if(t == coin.get(n)) {
-					
-					if(!flag) {	
-						memo[t][n]++;
-					}
-					
-					else
-						memo[t][n] = memo[t][n-1];
-					
-				}
-				
-				if(t>coin.get(n)) {
-
-					if(!flag) {
-						memo[t][n] = memo[t-coin.get(n)][n-1] + memo[t][n-1];
-					}
-					else {
-						
-						
-					}
-					
-				}
-				
-			}
-			
+		int rs = 0;
+		for (int n = 0; n <= coin[dept][1]; n++) {
+			rs += dfs(countMoney + coin[dept][0] * n, dept + 1);
 		}
 		
-		
-		
+		return memo[dept][countMoney] = rs; 
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -63,23 +45,28 @@ public class no2624 {
 
 		T = Integer.parseInt(br.readLine());
 
-		N = Integer.parseInt(br.readLine());
+		k = Integer.parseInt(br.readLine());
 
-		coin.add(0);
-		
-		for (int i = 0; i < N; i++) {
+		coin = new int[k][2];
+
+		for (int i = 0; i < k; i++) {
+
 			st = new StringTokenizer(br.readLine(), " ");
 
-			int c = Integer.parseInt(st.nextToken());
-			int cNum = Integer.parseInt(st.nextToken());
-
-			for (int j = 0; j < cNum; j++) {
-				coin.add(c);
-			}
+			coin[i][0] = Integer.parseInt(st.nextToken());
+			coin[i][1] = Integer.parseInt(st.nextToken());
 
 		}
+		
+		
+		memo = new int[k][T+1];
+		for(int i=0; i<k; i++) {
+			for(int j=0; j<T; j++) {
+				memo[i][j] = -1;
+			}
+		}
 
-		memo = new int[T + 1][coin.size()];
+		System.out.println(dfs(0,0));
 
 	}
 
