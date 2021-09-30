@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 public class no16927 {
 
 	static int[][] arr;
-	static int[][][] tmp;
+	static int[][] tmp;
 
 	public static void main(String[] args) throws IOException {
 
@@ -20,8 +20,8 @@ public class no16927 {
 		long R = Long.parseLong(st.nextToken());
 
 		arr = new int[N][M];
-		tmp = new int[2*(N-1)+2*(M-1)][N][M];
-
+		tmp = new int[N][M];
+		
 		for (int i = 0; i < N; i++) {
 
 			st = new StringTokenizer(br.readLine(), " ");
@@ -33,63 +33,21 @@ public class no16927 {
 
 		}
 
-		for (int r = 0; r < 2*(N-1)+2*(M-1); r++) {
-
-			// <-- 이동
-			for (int i = 0; i < N / 2; i++) {
-				for (int j = M - (i + 1); j >= (i + 1); j--) {
-					tmp[r][i][j - 1]= arr[i][j] ;
-				}
-			}
-			// ^ 이동
-			for (int j = M - 1; j >= M / 2; j--) {
-				for (int i = 1-j+(M-1); i < N + j - (M - 1); i++) {
-
-					tmp[r][i - 1][j] = arr[i][j];
-
-				}
-			}
-
-			// --> 이동
-			for (int i = N - 1; i >= N / 2; i--) {
-				for (int j = (N - 1) - i; j < M + i - N; j++) {
-					tmp[r][i][j + 1] = arr[i][j];
-				}
-			}
-
-			// 아래 이동
-			for (int j = 0; j < M / 2; j++) {
-				for (int i = j; i < N - j - 1; i++) {
-					tmp[r][i + 1][j] =arr[i][j];
-				}
-			}
-	
-			for (int i = 0; i < N; i++) {
-
-				for (int j = 0; j < M; j++) {
-
-					arr[i][j] = tmp[r][i][j];
-
-				}
-
-			}
-
-			
-		}
+		int min = Math.min(N,M);
 		
-		for (int i = 0; i < N; i++) {
+		for (int dept = 1; dept <= min / 2; dept++) {
 
-			for (int j = 0; j < M; j++) {
+			long r = R % (2 * ((N - 1-(dept-1)*2) + (M - 1-(dept-1)*2)));
 
-				arr[i][j] = tmp[(int)((R-1)%(2*(N-1)+2*(M-1)))][i][j];
-				
+			while (r-- > 0) {
+				spin(N, M, dept);
+				swap(N,M, dept);
 			}
 
 		}
 
-		
 		StringBuilder sb = new StringBuilder();
-		
+
 		for (int i = 0; i < N; i++) {
 
 			for (int j = 0; j < M; j++) {
@@ -97,13 +55,58 @@ public class no16927 {
 				sb.append(arr[i][j]).append(" ");
 
 			}
-			
+
 			sb.append("\n");
 
 		}
-		
+
 		System.out.println(sb);
 
+	}
+
+	private static void swap(int N, int M, int dept) {
+
+		for (int j = M - dept; j >= dept; j--) {
+			arr[dept - 1][j - 1] = tmp[dept-1][j - 1];
+		}
+
+		// v
+		for (int i = dept - 1; i < N - dept; i++) {
+			arr[i+1][dept - 1] = tmp[i + 1][dept-1];
+		}
+
+		// ->
+		for (int j = dept - 1; j < M - dept; j++) {
+			arr[N - dept][j+1] = tmp[N - dept][j + 1];
+		}
+
+		// ^
+		for (int i = N - dept; i >= dept; i--) {
+			arr[i-1][M - dept] = tmp[i - 1][M - dept];
+		}
+	}
+
+	private static void spin(int N, int M, int dept) {
+
+		// <-
+		for (int j = M - dept; j >= dept; j--) {
+			tmp[dept-1][j - 1] = arr[dept - 1][j];x
+		}
+
+		// v
+		for (int i = dept - 1; i < N - dept; i++) {
+			tmp[i + 1][dept-1] = arr[i][dept - 1];
+		}
+
+		// ->
+		for (int j = dept - 1; j < M - dept; j++) {
+			tmp[N - dept][j + 1] = arr[N - dept][j];
+		}
+
+		// ^
+		for (int i = N - dept; i >= dept; i--) {
+			tmp[i - 1][M - dept] = arr[i][M - dept];
+		}
 	}
 
 }
