@@ -4,19 +4,7 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 
-class node10 {
 
-	int x;
-	int y;
-
-	node10(int x, int y) {
-
-		this.x = x;
-		this.y = y;
-
-	}
- 
-}
 
 public class no7576 {
 
