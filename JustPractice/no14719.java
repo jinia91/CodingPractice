@@ -14,6 +14,7 @@ public class no14719 {
 	
 	public static void main(String[] args) throws IOException {
 
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
@@ -35,6 +36,8 @@ public class no14719 {
 			water += calcul();
 			
 		}
+		
+		
 		
 		System.out.println(water);
 		System.out.println(water == 1);
