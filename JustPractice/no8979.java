@@ -4,13 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class no8979 {
 
-	static class rank implements Comparable<rank> {
+	static class rank {
 
 		int num;
 		int gold;
@@ -18,24 +22,6 @@ public class no8979 {
 		int bronze;
 		int rank;
 
-		@Override
-		public int compareTo(rank o) {
-
-			if (this.gold == o.gold) {
-
-				if (this.gold+this.silver == o.gold+o.silver) {
-
-					return o.bronze - this.bronze;
-
-				}
-
-				return o.silver -  this.silver;
-
-			}
-
-			return o.gold-this.gold;
-
-		}
 
 		public rank(int num, int gold, int silver, int bronze) {
 			super();
@@ -44,8 +30,15 @@ public class no8979 {
 			this.silver = silver;
 			this.bronze = bronze;
 		}
-		
-		
+
+
+		@Override
+		public String toString() {
+			return "rank [num=" + num + ", gold=" + gold + ", silver=" + silver + ", bronze=" + bronze + ", rank="
+					+ rank + "]";
+		}
+
+
 
 	}
 
@@ -61,7 +54,7 @@ public class no8979 {
 		int target = Integer.parseInt(st.nextToken());
 		
 		
-		PriorityQueue<rank> pq = new PriorityQueue<>();
+		LinkedList<rank> pq = new LinkedList<>();
 		
 		for(int i = 0; i< N; i++) {
 			
@@ -74,47 +67,14 @@ public class no8979 {
 					
 		}
 		
-	    List<rank> list = new ArrayList<>();
 
-	    rank a = pq.poll();
-	    
-	    a.rank=1;
-	    
-	    if(target == 1) {System.out.println(a.num);
-	    return;}
-	    
-	    list.add(a);
-	    
-	    int cnt = 1;
-	    
-	    
-		for(int i = 1; i< N; i++) {
-			
-			rank x = pq.poll();
-			
-			
-			if(list.get(i-1).compareTo(x) == 0) {
-				
-				x.rank = list.get(i-1).rank;
-				cnt++;
-			}
-			
-			else {
-				
-				x.rank = list.get(i-1).rank+cnt;
-				
-				cnt = 1;
-			}
-			
-			if(x.num == target) {
-				System.out.println(x.rank);
-				return;
-			}
-			
-			list.add(x);
-			
-		}
-		
+	    Collections.sort(pq, Comparator
+	    		.comparingInt((rank o1) -> o1.gold)
+	    		.thenComparingInt(o1 -> o1.silver)
+	    		.thenComparingInt(o1 -> o1.bronze).reversed());
+
+	   pq.stream().forEach(o -> System.out.println(o)); 
+	    		
 		
 	}
 

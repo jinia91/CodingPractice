@@ -1,57 +1,33 @@
+package JustPractice;
+
 import java.util.*;
 import java.io.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 
 
 public class ex {
 
 	
-	
-	static int checkPoint(String S) {
-		
-		int cnt = 0;
-		int sum = 0;
-		
-		
-		for(int i = 0 ; i < S.length(); i++) {
-			
-			
-			if(S.charAt(i) == 'O') {
-				
-				cnt++;
-				
-				sum += cnt;
-			}
-			
-			else {
-				
-				cnt = 0;
-				
-			}
-			
-		}
-		
-		return sum;
-		
-	}
-	
-	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-		int N = Integer.valueOf(br.readLine());
+		Date time1 = new Date(2021-1900, 10, 19, 10, 13, 10);
+		Timestamp time2 = new Timestamp(2021-1900, 10, 19, 10, 13, 10,11);
+		Timestamp time3 = new Timestamp(2021-1900, 10, 19, 10, 13, 10,16);
 		
+		System.out.println(time1);
+		System.out.println(time2);
+		System.out.println(time3);
 		
-		for(int i = 0; i<N; i++) {
-			
-			String S = br.readLine();
-			
-			System.out.println(checkPoint(S));
-			
-			
-		}
+		System.out.println(time1.equals(time2));
+		System.out.println(time1.equals(time3));
 		
+		System.out.println(time2.equals(time1));
+		System.out.println(time2.equals(time3));
+		
+		System.out.println(time3.equals(time1));
+		System.out.println(time3.equals(time2));
 		
 		
 	}
