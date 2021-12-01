@@ -3,30 +3,26 @@ package JustPractice;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.StringTokenizer;
 
 public class no15552 {
 
 	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		int N = Integer.parseInt(br.readLine());
-
-		StringBuilder sb = new StringBuilder();
+		LocalDate now = LocalDate.now();
 		
-		for (int i = 0; i < N; i++) {
+		LocalDate next = LocalDate.of(2022, 1, 1);
 
-			StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-
-			int a = Integer.parseInt(st.nextToken());
-			int b = Integer.parseInt(st.nextToken());
-
-			sb.append(a+b).append("\n");
-			
-		}
+		long between = ChronoUnit.DAYS.between(now, next);
 		
-		System.out.println(sb);
-
+		System.out.println(now);
+		System.out.println(next);
+		
+		System.out.println(between);
+		
 	}
 
 }
