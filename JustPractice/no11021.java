@@ -22,7 +22,8 @@ public class no11021 {
 			int a = Integer.parseInt(st.nextToken());
 			int b = Integer.parseInt(st.nextToken());
 			
-			sb.append("Case #").append(i+1).append(": ").append(a+b).append("\n");
+			sb.append("Case #").append(i+1).append(": ")
+			.append(a + " + " + b + " = ").append(a+b).append("\n");
 			
 		}
 
