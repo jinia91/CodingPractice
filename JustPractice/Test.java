@@ -34,6 +34,14 @@ public class Test {
 		System.out.println(a.equals(e));
 		
 		
+		
+		String s1 = "안녕하세요오오오오오오";
+		
+		String s2 = "방가방가";
+		
+		
+		String s3 = s1+s2;
+		
 	}
 
 }
