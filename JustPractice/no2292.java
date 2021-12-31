@@ -1,38 +1,66 @@
 package JustPractice;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.awt.Point;
+import java.text.ParseException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class no2292 {
 
-	public static void main(String[] args) throws NumberFormatException, IOException {
+	public static void main(String[] args) throws NumberFormatException, ParseException {
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		int N = Integer.parseInt(br.readLine());
-		
-		int cri = 1;
-		
-		int index = 0;
-		
-		for(int i =0; i<Integer.MAX_VALUE; i++) {
-			
+		int[][] line = {{2, -1, 4}, {-2, -1, 4}, {0, -1, 1}, {5, -8, -12}, {5, 8, 12}};
 
-			cri += 6*i;
+		Set<Point> set = new HashSet<>();
+		
+		int maxX = -Integer.MAX_VALUE, minX = Integer.MAX_VALUE, 
+				maxY = -Integer.MAX_VALUE, minY = Integer.MAX_VALUE;
+		
+		for(int i = 0; i< line.length; i++) {
 			
-			if(N <= cri) {
-				index = i;
+			for(int j = i+1; j<line.length; j++) {
 				
-				break;
-			}
+				long AD_BC = line[i][0]*line[j][1] - line[i][1]*line[j][0];
+				long BF_ED = line[i][1]*line[j][2] - line[i][2]*line[j][1];
+				long EC_AF = line[i][2]*line[j][0] - line[i][0]*line[j][2];
+				
+				if(AD_BC == 0 ||
+				   BF_ED%AD_BC !=0 ||
+				   EC_AF%AD_BC !=0 ) continue;
+				
 			
+				int x = (int)(BF_ED/AD_BC);
+				int y = (int)(EC_AF/AD_BC);
+				 set.add(new Point(x,y));
+				 
+				 maxX = Math.max(maxX, x);
+				 maxY = Math.max(maxY, y);
+				 minX = Math.min(minX, x);
+				 minY = Math.min(minY, y);
+				
+			}
 			
 		}
 		
-		System.out.println(index+1);
+		int h= maxY-minY +1;
+		int w= maxX-minX +1;
+		
+		String[] answer = new String[h];
+		
+		char[] dummy = new char[w];
+		Arrays.fill(dummy, '.');
+		Arrays.fill(answer, new String(dummy));
+		
+		for(Point p : set) {
+		
+			char[] cArr = answer[maxY-p.y].toCharArray() ;
+			cArr[p.x-minX] = '*';
+			answer[maxY-p.y] = new String(cArr);
+		}
+		
+		System.out.println(Arrays.deepToString(answer));
 		
 		
 	}
-
 }
